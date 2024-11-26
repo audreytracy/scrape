@@ -80,7 +80,7 @@ def scrape():
             print(permit_days[i].text, permit_days[i].text.strip() != '35')
             print("----------------")
 
-            if permit_days[i].text.strip() == '35':
+            if permit_days[i].text.strip() != '35':
                 send_email()
                 # print("HELLOOOO")
                 # break
