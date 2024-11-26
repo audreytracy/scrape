@@ -45,10 +45,10 @@ def send_email():
     message = Mail(
         from_email='audtracy@outlook.com',
         to_emails='audtracy@gmail.com',
-        subject='TEST ALERT: PCT PERMIT AVAILABLE IN MAY',
+        subject='ALERT: PCT PERMIT AVAILABLE IN MAY',
         html_content='<strong>GO GET THE PERMIT JOSH. GO. PERMIT. NOW.</strong>')
     try:
-        sg = SendGridAPIClient(api_key="")
+        sg = SendGridAPIClient(api_key="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")
         response = sg.send(message)
         print(response.status_code)
         print(response.body)
@@ -81,8 +81,8 @@ def scrape():
             print("----------------")
 
             if permit_days[i].text.strip() != '35':
-                send_email()
-                # print("HELLOOOO")
+                # send_email()
+                print("HELLOOOO")
                 # break
 
         time.sleep(1) # sleep 1 second
@@ -90,8 +90,8 @@ def scrape():
     driver.close() # close webdriver
 
 @app.get("/")
-def readme() -> HTMLResponse:
-    scrape()
+def readme(background_tasks: BackgroundTasks) -> HTMLResponse:
+    background_tasks.add_task(scrape)
     readme = """
         <!DOCTYPE html>
         <html lang="en">
