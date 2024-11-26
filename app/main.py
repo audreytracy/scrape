@@ -30,17 +30,6 @@ def world_step() -> str:
     return "world"
 
 
-# @app.get("/hello")
-# @DBOS.workflow()
-# def hello_world() -> str:
-#     hello = hello_step()
-#     world = world_step()
-#     return f"{hello}, {world}!"
-
-
-# This code uses FastAPI to serve an HTML + CSS readme from the root path.
-
-
 def send_email():
     message = Mail(
         from_email='audtracy@outlook.com',
@@ -71,21 +60,19 @@ def scrape():
     ActionChains(driver).click(next_button[0]).perform() # into April
     ActionChains(driver).click(next_button[0]).perform() # into May
 
-    while(True):
+    permit_days = driver.find_elements(By.CLASS_NAME, "fc-event-container")
 
-        permit_days = driver.find_elements(By.CLASS_NAME, "fc-event-container")
+    for i in range(len(permit_days)):
+        print("----------------")
+        print(permit_days[i].text, permit_days[i].text.strip() != '35')
+        print("----------------")
 
-        for i in range(len(permit_days)):
-            print("----------------")
-            print(permit_days[i].text, permit_days[i].text.strip() != '35')
-            print("----------------")
+        if permit_days[i].text.strip() != '35':
+            # send_email()
+            print("HELLOOOO")
+            # break
 
-            if permit_days[i].text.strip() != '35':
-                # send_email()
-                print("HELLOOOO")
-                # break
-
-        time.sleep(1) # sleep 1 second
+    time.sleep(1) # sleep 1 second
 
     driver.close() # close webdriver
 
