@@ -45,7 +45,7 @@ def send_email():
     message = Mail(
         from_email='audtracy@outlook.com',
         to_emails='audtracy@gmail.com',
-        subject='ALERT: PCT PERMIT AVAILABLE IN MAY',
+        subject='TEST ALERT: PCT PERMIT AVAILABLE IN MAY',
         html_content='<strong>GO GET THE PERMIT JOSH. GO. PERMIT. NOW.</strong>')
     try:
         sg = SendGridAPIClient(api_key="")
@@ -80,9 +80,9 @@ def scrape():
             print(permit_days[i].text, permit_days[i].text.strip() != '35')
             print("----------------")
 
-            if permit_days[i].text.strip() != '35':
-                # send_email()
-                print("HELLOOOO")
+            if permit_days[i].text.strip() == '35':
+                send_email()
+                # print("HELLOOOO")
                 # break
 
         time.sleep(1) # sleep 1 second
